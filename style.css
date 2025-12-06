@@ -1,0 +1,169 @@
+/* Basic Reset and Variables */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+:root {
+    --color-primary: #6c5ce7; /* Purple */
+    --color-secondary: #00cec9; /* Cyan */
+    --color-success: #0be881; /* Green */
+    --color-danger: #ff6b81; /* Red */
+    --color-background-mix: linear-gradient(135deg, #6c5ce7, #a29bfe, #00cec9);
+}
+
+/* Header Styling */
+header {
+    background: var(--color-background-mix);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .college-name {
+    font-size: 1.5em;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+header h1 {
+    margin: 5px 0 0 0;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+/* Main Container and General Layout */
+#app-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    width: 95%;
+}
+
+.view-section {
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Form and Button Styling */
+.login-options button, button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #5d48e0;
+    transform: translateY(-2px);
+}
+
+#login-form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-form label, #login-form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#login-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: var(--color-danger);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Table Styling for Attendance */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--color-secondary);
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.present { color: var(--color-success); font-weight: bold; }
+.absent { color: var(--color-danger); font-weight: bold; }
+
+/* Teacher Dashboard Specifics */
+.section-students {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.attendance-mark {
+    display: flex;
+    gap: 10px;
+}
+
+.attendance-mark input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Footer Styling */
+footer {
+    padding: 10px;
+    text-align: center;
+    background-color: #e9ecef;
+    border-top: 1px solid #ccc;
+    margin-top: auto;
+}
+
+.created-by {
+    font-size: 0.8em;
+    color: #555;
+}
+.created-by strong {
+    font-weight: bold;
+    color: #222;
+}

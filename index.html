@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="c:\Users\K Vinay\OneDrive\Pictures\collage\1000106858.png" width="80px" height="80px">
+        <div class="college-name">SSSE</div>
+        <h1>Attendance Management</h1>
+    </header>
+
+    <main id="app-container">
+        <section id="login-view" class="view-section">
+            <h2 align="center">User Login</h2>
+            <div align="center"  class="login-options" >
+                <button onclick="showLogin('teacher')">Teacher Login</button><br>
+                <button onclick="showLogin('student')">Student Login</button>
+            </div>
+
+            <form id="login-form" class="hidden" onsubmit="handleLogin(event)">
+                <h3 id="login-type-heading"></h3>
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="identifier" id="identifier-label"></label>
+                <input type="text" id="identifier" required>
+
+                <p id="login-error" class="error-message"></p>
+
+                <button type="submit">Login</button>
+                <button type="button" onclick="showLoginOptions()">Back</button>
+            </form>
+        </section>
+
+        <section id="dashboard-view" class="view-section hidden"></section>
+    </main>
+
+    <footer>
+        <p class="created-by">
+            CREATED BY : <br>
+             K Vinay <br>Balaji H M <br>Ajith Nayak M<br>
+             Gulam Rasul
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
