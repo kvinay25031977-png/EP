@@ -1,6 +1,7 @@
-
 // --- 1. DATA STRUCTURE (The "Backend" Data Store) ---
-const ATTENDANCE_DATA = {
+
+// 1.1. Base Data Structure (Used only if localStorage is empty)
+const BASE_ATTENDANCE_DATA = {
     teachers: [
         { id: 'T1', name: 'Bean' },
         { id: 'T2', name: 'Max' },
@@ -8,8 +9,8 @@ const ATTENDANCE_DATA = {
         { id: 'T4', name: 'Oggy' },
         { id: 'T5', name: 'Tom' },
         { id: 'T6', name: 'Ele' },
-         { id: 'T7', name: 'Steve' }
-],
+        { id: 'T7', name: 'Steve' }
+    ],
     students: [
         { usn: '060', name: 'Vinay', section: 'A' },
         { usn: '007', name: 'Ajith', section: 'A' },
@@ -17,117 +18,52 @@ const ATTENDANCE_DATA = {
         { usn: '051', name: 'Gulam', section: 'A' },
         { usn: '116', name: 'Mehaboob', section: 'B' },
         { usn: '183', name: 'Reddy', section: 'C' },
-         { usn: '067', name: 'Khaja', section: 'B' },
-          { usn: '171', name: 'Noor', section: 'C' },
-           { usn: '062', name: 'Karun', section: 'B' },
-            { usn: '024', name: 'Basu', section: 'A' },
-             { usn: '058', name: 'Imran', section: 'A' },
-              { usn: '141', name: 'Sagar', section: 'C' },
-               { usn: '154', name: 'Shivu', section: 'C' },
-                { usn: '050', name: 'Uday', section: 'C' }
+        { usn: '067', name: 'Khaja', section: 'B' },
+        { usn: '171', name: 'Noor', section: 'C' },
+        { usn: '062', name: 'Karun', section: 'B' },
+        { usn: '024', name: 'Basu', section: 'A' },
+        { usn: '058', name: 'Imran', section: 'A' },
+        { usn: '141', name: 'Sagar', section: 'C' },
+        { usn: '154', name: 'Shivu', section: 'C' },
+        { usn: '050', name: 'Uday', section: 'C' }
     ],
-    // Subjects taken by a teacher (takenBy is the teacher ID)
     subjects: [
         { code: 'CS501', name: 'Software engineering', takenBy: 'T1' },
         { code: 'CS502', name: 'Computer Network', takenBy: 'T2' },
         { code: 'CS503', name: 'TOC ', takenBy: 'T3' },
-         { code: 'CS504', name: 'AI ', takenBy: 'T4' },
-          { code: 'CS505', name: 'RMIPR', takenBy: 'T5' },
-           { code: 'CS506', name: 'EVS ', takenBy: 'T6' },
-            { code: 'CS507', name: 'PE ', takenBy: 'T7' }
+        { code: 'CS504', name: 'AI ', takenBy: 'T4' },
+        { code: 'CS505', name: 'RMIPR', takenBy: 'T5' },
+        { code: 'CS506', name: 'EVS ', takenBy: 'T6' },
+        { code: 'CS507', name: 'PE ', takenBy: 'T7' }
     ],
-    // Storage for P/A records. Key: USN -> Subject Code -> Array of {date, periods:[P1,P2,P3,P4]}
-    records: {
-        '060': { 
-            'CS501': [ { date: '2025-12-08', periods: ['P', 'P', 'A', 'P'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['P', 'A', 'P', 'A'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'P'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-        },
-        '007': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-        },
-        '022': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '051': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '116': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '024': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '183': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '141': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '067': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'A', 'A', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '050': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['A', 'P', 'P', 'A'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'A', 'A', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    },
-    '154': {
-            'CS501': [ { date: '2025-12-08', periods: ['A', 'A', 'P', 'A'] } ],
-            'CS502': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS503': [ { date: '2025-12-08', periods: ['A', 'A', 'A', 'P'] } ],
-            'CS504': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'A'] } ],
-            'CS505': [ { date: '2025-12-08', periods: ['A', 'A', 'A', 'A'] } ],
-            'CS506': [ { date: '2025-12-08', periods: ['P', 'P', 'P', 'P'] } ]
-    }
-}
+    // The initial records object is used if storage is empty.
 };
+
+/**
+ * 💡 KEY CHANGE: Load data from localStorage or use the base data.
+ */
+function loadAttendanceData() {
+    const storedData = localStorage.getItem('ATTENDANCE_DATA');
+    if (storedData) {
+        // Parse the stored JSON back into a JavaScript object
+        return JSON.parse(storedData);
+    }
+    // If nothing is stored, initialize localStorage with the base data
+    saveAttendanceData(BASE_ATTENDANCE_DATA);
+    return BASE_ATTENDANCE_DATA;
+}
+
+/**
+ * 💡 NEW FUNCTION: Saves the current state of ATTENDANCE_DATA to localStorage.
+ */
+function saveAttendanceData(data) {
+    // Stringify the JavaScript object into a JSON string and save it
+    localStorage.setItem('ATTENDANCE_DATA', JSON.stringify(data));
+}
+
+// Global variable now holds the data loaded from storage (or the base data)
+let ATTENDANCE_DATA = loadAttendanceData();
+
 
 // --- 2. GLOBAL STATE ---
 let currentUser = null;
@@ -146,7 +82,7 @@ function showLogin(type) {
 
     userType = type;
     heading.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} Login`;
-    
+
     if (type === 'teacher') {
         label.textContent = 'Teacher ID:';
         identifierInput.placeholder = 'e.g., TX';
@@ -166,6 +102,8 @@ function showLoginOptions() {
     document.getElementById('login-form').reset();
     currentUser = null;
     userType = null;
+    // Re-load data just in case a background change occurred (optional, but robust)
+    ATTENDANCE_DATA = loadAttendanceData(); 
 }
 
 // Handles form submission for login
@@ -177,11 +115,11 @@ function handleLogin(event) {
     errorMsg.textContent = '';
 
     if (userType === 'teacher') {
-        currentUser = ATTENDANCE_DATA.teachers.find(t => 
+        currentUser = ATTENDANCE_DATA.teachers.find(t =>
             t.name.toLowerCase() === name.toLowerCase() && t.id === identifier
         );
     } else { // student
-        currentUser = ATTENDANCE_DATA.students.find(s => 
+        currentUser = ATTENDANCE_DATA.students.find(s =>
             s.name.toLowerCase() === name.toLowerCase() && s.usn === identifier
         );
     }
@@ -235,7 +173,7 @@ function renderTeacherDashboard(dashboard) {
             </select>
         </div>
         <div id="attendance-form-container"></div>
-         <a href="index.html">  <button onclick="showLoginOptions()">Logout</button></a>
+           <a href="index.html">  <button onclick="showLoginOptions()">Logout</button></a>
     `;
 }
 
@@ -250,8 +188,10 @@ function renderAttendanceForm() {
     // Filter students by section
     const studentsInSection = ATTENDANCE_DATA.students.filter(s => s.section === section);
 
+    const subjectName = ATTENDANCE_DATA.subjects.find(s => s.code === subjectCode)?.name || subjectCode;
+
     let formHTML = `<form onsubmit="saveAttendance(event, '${subjectCode}', '${section}')">
-        <h4>Mark Attendance for ${section} in ${ATTENDANCE_DATA.subjects.find(s => s.code === subjectCode).name}</h4>
+        <h4>Mark Attendance for Section ${section} in ${subjectName} (Today)</h4>
         <table>
             <thead>
                 <tr>
@@ -264,11 +204,11 @@ function renderAttendanceForm() {
                 </tr>
             </thead>
             <tbody>`;
-    
+
     // Create rows for each student
     studentsInSection.forEach(student => {
         const studentUSN = student.usn;
-        
+
         // Find existing record for today, if any
         const existingRecord = ATTENDANCE_DATA.records[studentUSN]?.[subjectCode]?.find(r => r.date === todayDate);
 
@@ -280,7 +220,7 @@ function renderAttendanceForm() {
                     <td>
                         <div class="attendance-mark">
                             <label>
-                                <input type="radio" name="${studentUSN}_P${period}" value="P" required 
+                                <input type="radio" name="${studentUSN}_P${period}" value="P" required
                                     ${existingRecord?.periods[period-1] === 'P' ? 'checked' : ''}> P
                             </label>
                             <label>
@@ -330,10 +270,10 @@ function saveAttendance(event, subjectCode, section) {
             if (!ATTENDANCE_DATA.records[studentUSN][subjectCode]) {
                 ATTENDANCE_DATA.records[studentUSN][subjectCode] = [];
             }
-            
+
             // Check if record for today exists and update/create it
             const existingIndex = ATTENDANCE_DATA.records[studentUSN][subjectCode].findIndex(r => r.date === todayDate);
-            
+
             if (existingIndex !== -1) {
                 // Update
                 ATTENDANCE_DATA.records[studentUSN][subjectCode][existingIndex].periods = periods;
@@ -343,8 +283,13 @@ function saveAttendance(event, subjectCode, section) {
             }
         }
     });
+    
+    /**
+     * 💡 KEY CHANGE: Save the updated ATTENDANCE_DATA to localStorage after every update.
+     */
+    saveAttendanceData(ATTENDANCE_DATA);
 
-    alert(`Attendance for ${subjectCode} in Section ${section} saved successfully for ${todayDate}! (Note: Data is temporary and will reset on refresh)`);
+    alert(`Attendance for ${subjectCode} in Section ${section} saved successfully for ${todayDate}! Data is now persistent.`);
     renderAttendanceForm(); // Re-render to show updated status/checked boxes
 }
 
@@ -353,23 +298,25 @@ function saveAttendance(event, subjectCode, section) {
 
 function renderStudentDashboard(dashboard) {
     const studentUSN = currentUser.usn;
+    // Ensure we load the freshest data before rendering the student view
+    ATTENDANCE_DATA = loadAttendanceData(); 
     const studentRecords = ATTENDANCE_DATA.records[studentUSN] || {};
-    
+
     // Check if there are any records at all
     const hasRecords = Object.keys(studentRecords).length > 0;
 
     dashboard.innerHTML += `
-        <h3>Your Attendance Analysis (Monthly Percentage)</h3>
+        <h3>Your Attendance Analysis (Overall Percentage)</h3>
         <p>Showing records for USN: **${studentUSN}**</p>
         <div id="student-percentage-analysis">
             ${hasRecords ? generateMonthlyPercentage(studentRecords) : '<p>No attendance records found yet.</p>'}
         </div>
-        
+
         <h3>Your Daily Attendance History</h3>
         <div id="student-daily-history">
             ${hasRecords ? generateDailyHistory(studentRecords) : ''}
         </div>
-        
+
       <a href="index.html">  <button onclick="showLoginOptions()">Logout</button></a>
     `;
 }
@@ -380,7 +327,7 @@ function generateMonthlyPercentage(studentRecords) {
     for (const subjectCode in studentRecords) {
         const subjectName = ATTENDANCE_DATA.subjects.find(s => s.code === subjectCode)?.name || subjectCode;
         const records = studentRecords[subjectCode];
-        
+
         let totalPeriods = 0;
         let presentPeriods = 0;
 
@@ -390,10 +337,10 @@ function generateMonthlyPercentage(studentRecords) {
             presentPeriods += dayRecord.periods.filter(p => p === 'P').length;
         });
 
-        const percentage = totalPeriods > 0 
+        const percentage = totalPeriods > 0
             ? ((presentPeriods / totalPeriods) * 100).toFixed(2)
             : '0.00';
-        
+
         const percentageClass = parseFloat(percentage) >= 75 ? 'present' : 'absent';
 
         html += `
@@ -412,21 +359,21 @@ function generateMonthlyPercentage(studentRecords) {
 
 function generateDailyHistory(studentRecords) {
     let html = '';
-    
+
     for (const subjectCode in studentRecords) {
         const subjectName = ATTENDANCE_DATA.subjects.find(s => s.code === subjectCode)?.name || subjectCode;
         const records = studentRecords[subjectCode];
-        
+
         html += `<h4>${subjectName} (${subjectCode})</h4>
             <table>
                 <thead>
                     <tr><th>Date</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th></tr>
                 </thead>
                 <tbody>`;
-        
+
         // Sort records by date descending
         records.sort((a, b) => new Date(b.date) - new Date(a.date));
-        
+
         records.forEach(dayRecord => {
             html += `<tr><td>${dayRecord.date}</td>`;
             dayRecord.periods.forEach(p => {
@@ -438,7 +385,7 @@ function generateDailyHistory(studentRecords) {
 
         html += `</tbody></table>`;
     }
-    
+
     return html;
 }
 
