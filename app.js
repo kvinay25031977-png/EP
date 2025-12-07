@@ -37,7 +37,7 @@ const BASE_ATTENDANCE_DATA = {
         { code: 'CS507', name: 'PE ', takenBy: 'T7' }
     ],
     // The initial records object is used if storage is empty.
-     records: {
+    records: {
         '060': {
             'CS501': [ { date: '2025-12-06', periods: ['P', 'P', 'A', 'P'] } ],
             'CS502': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'P'] } ],
