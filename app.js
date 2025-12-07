@@ -37,6 +37,8 @@ const BASE_ATTENDANCE_DATA = {
         { code: 'CS507', name: 'PE ', takenBy: 'T7' }
     ],
     // The initial records object is used if storage is empty.
+    records{
+}
     };
 
 /**
