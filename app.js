@@ -37,6 +37,96 @@ const BASE_ATTENDANCE_DATA = {
         { code: 'CS507', name: 'PE ', takenBy: 'T7' }
     ],
     // The initial records object is used if storage is empty.
+     records: {
+        '060': {
+            'CS501': [ { date: '2025-12-06', periods: ['P', 'P', 'A', 'P'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['P', 'A', 'P', 'A'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'P'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '007': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '022': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '051': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '116': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '024': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '183': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '141': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '067': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'A', 'A', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '050': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['A', 'P', 'P', 'A'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'A', 'A', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        },
+        '154': {
+            'CS501': [ { date: '2025-12-06', periods: ['A', 'A', 'P', 'A'] } ],
+            'CS502': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS503': [ { date: '2025-12-06', periods: ['A', 'A', 'A', 'P'] } ],
+            'CS504': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'A'] } ],
+            'CS505': [ { date: '2025-12-06', periods: ['A', 'A', 'A', 'A'] } ],
+            'CS506': [ { date: '2025-12-06', periods: ['P', 'P', 'P', 'P'] } ]
+        }
+    }
 };
 
 /**
